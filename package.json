@@ -1,0 +1,19 @@
+{
+  "name": "grunt-angular-templatecache",
+  "version": "0.0.1",
+  "description": "",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/remcohaszing/grunt-angular-templatecache.git"
+  },
+  "author": "remcohaszing",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/remcohaszing/grunt-angular-templatecache/issues"
+  },
+  "homepage": "https://github.com/remcohaszing/grunt-angular-templatecache"
+}
