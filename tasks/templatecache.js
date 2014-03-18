@@ -9,7 +9,7 @@ module.exports = function(grunt) {
             htmlmin: {},
             quote: '\'',
             strict: true,
-            indent: '    '
+            indent: '  '
         });
 
         function q(string) {
