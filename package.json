@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/remcohaszing/grunt-angular-templatecache/issues"
   },
-  "homepage": "https://github.com/remcohaszing/grunt-angular-templatecache"
+  "homepage": "https://github.com/remcohaszing/grunt-angular-templatecache",
+  "devDependencies": {
+    "html-minifier": "^0.5.6"
+  }
 }
