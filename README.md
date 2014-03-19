@@ -55,6 +55,12 @@ Default: `true`
 
 If `true`, `'use strict';` is prepended to the top of the file.
 
+#### newModule
+Type: `Boolean`  
+Default: `false`
+
+If `true`, a new module is created which can be included. If `false`, an existing module is used.
+
 #### indent
 Type: `String`  
 Default: `'  '`

@@ -9,6 +9,7 @@ module.exports = function(grunt) {
             htmlmin: {},
             quote: '\'',
             strict: true,
+            newModule: false,
             indent: '  '
         });
 
@@ -22,9 +23,12 @@ module.exports = function(grunt) {
         var indent = options.indent;
         var dest;
 
-        var prefix =
-            'angular.module(' + q(options.module) + ').\n' +
-            'run([' + q('$templateCache') + ', function($templateCache) {';
+        var prefix = 'angular.module(' + q(options.module);
+        if(options.newModule) {
+            prefix += ', []';
+        }
+        prefix += ').\nrun([' + q('$templateCache') +
+            ', function($templateCache) {';
         if(options.strict) {
             prefix = q('use strict') + ';\n\n' + prefix;
         }
