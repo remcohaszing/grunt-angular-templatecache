@@ -69,18 +69,58 @@ module.exports = function(grunt) {
         clean: {
             tmp: ['tmp']
         },
+        jshint: {
+            options: {
+                jshintrc: '.jshintrc'
+            },
+            files: [
+                'tasks/**/*.js',
+                'test/*.js',
+                'Gruntfile.js'
+            ]
+        },
+        lintspaces: {
+            options: {
+                newline: true,
+                trailingspaces: true,
+                indentation: 'spaces',
+                spaces: 4,
+                ignores: [
+                    'js-comments'
+                ]
+            },
+            js: {
+                src: ['<%= jshint.files %>']
+            }
+        },
         nodeunit: {
             tests: 'test/**/*_test.js'
+        },
+        watch: {
+            src: {
+                files: ['tasks/**', 'test/**', 'Gruntfile.js'],
+                tasks: ['jshint', 'lintspaces', 'test']
+            }
         }
     });
 
     grunt.loadTasks('tasks');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-lintspaces');
 
-    grunt.registerTask('test', 'Clean and run the tests', [
+    grunt.registerTask('test', 'Clean and run the tests.', [
         'clean',
         'angularTemplateCache',
         'nodeunit'
     ]);
+
+    grunt.registerTask(
+        'default',
+        'Watch files and run jshint and tests on changes.', [
+            'watch'
+        ]
+    );
 };

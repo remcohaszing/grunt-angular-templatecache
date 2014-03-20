@@ -51,10 +51,11 @@ module.exports = function(grunt) {
                 } else {
                     var ending = '\n' + indent + indent;
                     out += ending;
-                    out += q(minified).replace(/\n/g, '\\n' + q(' +' + ending));
+                    out += q(minified).replace(
+                        /\n/g, '\\n' + q(' +' + ending));
                     out += '\n' + indent;
                 }
-                out += ');'
+                out += ');';
                 dest = f.dest;
             });
             grunt.file.write(files.dest, prefix + out + postfix);
