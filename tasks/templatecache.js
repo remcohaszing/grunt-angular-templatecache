@@ -1,6 +1,11 @@
 'use strict';
 
 var minify = require('html-minifier').minify;
+var finalTemplate =
+    '<%= strict %>angular.module(<%= moduleName %><%= newModule %>).\n' +
+    'run([<%= templateCache %>, function($templateCache) {' +
+    '<%= put(cache) %>\n' +
+    '}]);\n';
 
 module.exports = function(grunt) {
 
@@ -17,6 +22,16 @@ module.exports = function(grunt) {
             throw new Error('module must be defined.');
         }
 
+        var indent = options.indent;
+        var putTemplate = '$templateCache.put(<%= name %>,<%= template %>);';
+
+        /**
+         * Escape backslashes and the specified quotes and prepend and
+         * append a quote.
+         *
+         * @param {string} The string to quote.
+         * @returns The quoted string.
+         */
         function q(string) {
             var quote = options.quote;
             string = string.replace(/\\/, '\\\\');
@@ -24,41 +39,54 @@ module.exports = function(grunt) {
             return quote + string + quote;
         }
 
-        var indent = options.indent;
-        var dest;
+        /**
+         * Parse the templates to the putTemplate template.
+         *
+         * @param {templates} An object consisting of key->value pairs
+         *                    of templateName->templateContent.
+         */
+        function parsePutTemplate(templates) {
+            var out = '';
+            for(var name in templates) {
+                var tmpl = q(templates[name]);
+                if(tmpl.indexOf('\n') === -1) {
+                    tmpl = ' ' + tmpl;
+                } else {
+                    var ending = '\n' + indent + indent;
+                    tmpl = tmpl.replace(/\n/g, '\\n' + q(' +' + ending));
+                    tmpl = ending + tmpl + '\n' + indent;
+                }
+                out += '\n' + indent + grunt.template.process(
+                    putTemplate, {
+                        data: {
+                            name: q(name),
+                            template: tmpl
+                        }
+                    }
+                );
+            }
+            return out;
+        }
 
-        var prefix = 'angular.module(' + q(options.module);
-        if(options.newModule) {
-            prefix += ', []';
-        }
-        prefix += ').\nrun([' + q('$templateCache') +
-            ', function($templateCache) {';
-        if(options.strict) {
-            prefix = q('use strict') + ';\n\n' + prefix;
-        }
-        var postfix = '\n}]);\n';
 
         this.files.forEach(function(files) {
-            var out = '';
+            var cache = {};
             files.src.filter(function(f) {
                 grunt.log.writeln('Found template: ' + f);
                 var content = grunt.file.read(files.cwd+ '/' + f);
-                var minified = minify(content, options.htmlmin);
-                out += '\n' + options.indent + '$templateCache.put(';
-                out += q(f) + ',';
-                if(minified.indexOf('\n') === -1) {
-                    out += ' ' + q(minified);
-                } else {
-                    var ending = '\n' + indent + indent;
-                    out += ending;
-                    out += q(minified).replace(
-                        /\n/g, '\\n' + q(' +' + ending));
-                    out += '\n' + indent;
-                }
-                out += ');';
-                dest = f.dest;
+                cache[f] = minify(content, options.htmlmin);
             });
-            grunt.file.write(files.dest, prefix + out + postfix);
+            var parsedTemplate = grunt.template.process(finalTemplate, {
+                data: {
+                    strict: options.strict ? q('use strict') + ';\n\n' : '',
+                    moduleName: q(options.module),
+                    newModule: options.newModule ? ', []' : '',
+                    templateCache: q('$templateCache'),
+                    cache: cache,
+                    put: parsePutTemplate
+                }
+            });
+            grunt.file.write(files.dest, parsedTemplate);
         });
     });
 };
