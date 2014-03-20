@@ -13,6 +13,10 @@ module.exports = function(grunt) {
             indent: '  '
         });
 
+        if(options.module === undefined) {
+            throw new Error('module must be defined.');
+        }
+
         function q(string) {
             var quote = options.quote;
             string = string.replace(/\\/, '\\\\');
@@ -37,7 +41,7 @@ module.exports = function(grunt) {
         this.files.forEach(function(files) {
             var out = '';
             files.src.filter(function(f) {
-                grunt.log.writeln(f);
+                grunt.log.writeln('Found template: ' + f);
                 var content = grunt.file.read(files.cwd+ '/' + f);
                 var minified = minify(content, options.htmlmin);
                 out += '\n' + options.indent + '$templateCache.put(';
@@ -47,7 +51,7 @@ module.exports = function(grunt) {
                 } else {
                     var ending = '\n' + indent + indent;
                     out += ending;
-                    ou += q(minified).replace(/\n/g, q(' +' + ending));
+                    out += q(minified).replace(/\n/g, '\\n' + q(' +' + ending));
                     out += '\n' + indent;
                 }
                 out += ');'

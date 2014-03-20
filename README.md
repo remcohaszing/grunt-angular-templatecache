@@ -2,8 +2,6 @@
 
 > Put AngularJS templates in the template cache.
 
-This package is still untested.
-
 
 
 ## Getting Started

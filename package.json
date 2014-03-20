@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/remcohaszing/grunt-angular-templatecache",
   "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
     "html-minifier": "^0.5.6"
   }
 }
