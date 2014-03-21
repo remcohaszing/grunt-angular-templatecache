@@ -143,7 +143,7 @@ module.exports = function(grunt) {
         watch: {
             src: {
                 files: ['tasks/**', 'test/**', 'Gruntfile.js'],
-                tasks: ['jshint', 'lintspaces', 'test']
+                tasks: ['test']
             }
         }
     });
@@ -157,6 +157,8 @@ module.exports = function(grunt) {
 
     grunt.registerTask('test', 'Clean and run the tests.', [
         'clean',
+        'jshint',
+        'lintspaces',
         'angularTemplateCache',
         'nodeunit'
     ]);
