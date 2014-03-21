@@ -73,8 +73,15 @@ module.exports = function(grunt) {
             var cache = {};
             files.src.filter(function(f) {
                 grunt.log.writeln('Found template: ' + f);
-                var content = grunt.file.read(files.cwd+ '/' + f);
-                cache[f] = minify(content, options.htmlmin);
+                var content = grunt.file.read(files.cwd + '/' + f);
+                if (options.preprocess instanceof Function) {
+                    content = options.preprocess(content, f);
+                }
+                content = minify(content, options.htmlmin);
+                if (options.postprocess instanceof Function) {
+                    content = options.postprocess(content, f);
+                }
+                cache[f] = content;
             });
             var parsedTemplate = grunt.template.process(finalTemplate, {
                 data: {

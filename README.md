@@ -35,6 +35,16 @@ Default: `{}`
 
 These options are passed to [minify](https://github.com/kangax/html-minifier#options-quick-reference). before putting the templates in the template cache.
 
+#### preprocess
+Type: `Function`
+
+If this is a function, it will be called before passing the template to minify. The first argument passed is the content, the second one the template name. It should return the processed content.
+
+#### postprocess
+Type: `Function`
+
+If this is a function, it will be called after passing the template to minify. The first argument passed is the content, the second one the template name. It should return the processed content.
+
 #### module
 Type: `String`
 
@@ -67,27 +77,8 @@ The string to use for indentation.
 
 
 ### Usage examples
-```js
-angularTemplateCache: {
-    options: {
-        module: 'my.project',
-        indent: '    ',
-        htmlmin: {
-            collapseBooleanAttributes: true,
-            collapseWhitespace: true,
-            removeAttributeQuotes: true,
-            removeComments: true,
-            removeOptionalTags: true,
-            removeRedundantAttributes: true
-        }
-    },
-    dist: {
-        cwd: 'src',
-        src: ['**/*.html', '!index.html'],
-        dest: 'dist/templates.js'
-    }
-}
-```
+
+For usage examples see the [gruntfile](https://github.com/remcohaszing/grunt-angular-templatecache/blob/master/Gruntfile.js) for this project.
 
 
 ## License

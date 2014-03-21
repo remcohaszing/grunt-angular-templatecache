@@ -57,6 +57,32 @@ module.exports = function(grunt) {
                 dest: 'tmp/no_strict.js',
                 cwd: 'test/fixtures'
             },
+            postprocess: {
+                options: {
+                    htmlmin: {
+                        collapseWhitespace: true
+                    },
+                    postprocess: function(content, name) {
+                        return '<!doctype html>\n' + content;
+                    }
+                },
+                src: 'index.html',
+                dest: 'tmp/postprocess.js',
+                cwd: 'test/fixtures'
+            },
+            preprocess: {
+                options: {
+                    htmlmin: {
+                        collapseWhitespace: true
+                    },
+                    preprocess: function(content, name) {
+                        return '<!doctype html>\n' + content;
+                    }
+                },
+                src: 'index.html',
+                dest: 'tmp/preprocess.js',
+                cwd: 'test/fixtures'
+            },
             tabs: {
                 options: {
                     indent: '\t'
