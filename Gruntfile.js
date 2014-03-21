@@ -83,6 +83,16 @@ module.exports = function(grunt) {
                 dest: 'tmp/preprocess.js',
                 cwd: 'test/fixtures'
             },
+            processName: {
+                options: {
+                    processName: function(name, content) {
+                        return name.replace(/.html$/, '');
+                    }
+                },
+                src: 'index.html',
+                dest: 'tmp/process_name.js',
+                cwd: 'test/fixtures'
+            },
             tabs: {
                 options: {
                     indent: '\t'

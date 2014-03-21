@@ -45,6 +45,11 @@ Type: `Function`
 
 If this is a function, it will be called after passing the template to minify. The first argument passed is the content, the second one the template name. It should return the processed content.
 
+#### processName
+Type: `Function`
+
+If this is a function, it will be called with the template name as the first argument and the template content as the second argument. The returned value is used as the template name.
+
 #### module
 Type: `String`
 

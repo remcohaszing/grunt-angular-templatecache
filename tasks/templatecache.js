@@ -81,6 +81,9 @@ module.exports = function(grunt) {
                 if (options.postprocess instanceof Function) {
                     content = options.postprocess(content, f);
                 }
+                if (options.processName instanceof Function) {
+                    f = options.processName(f, content);
+                }
                 cache[f] = content;
             });
             var parsedTemplate = grunt.template.process(finalTemplate, {
