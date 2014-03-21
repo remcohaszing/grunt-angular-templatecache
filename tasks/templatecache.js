@@ -77,7 +77,9 @@ module.exports = function(grunt) {
                 if (options.preprocess instanceof Function) {
                     content = options.preprocess(content, f);
                 }
-                content = minify(content, options.htmlmin);
+                if (options.htmlmin !== null) {
+                    content = minify(content, options.htmlmin);
+                }
                 if (options.postprocess instanceof Function) {
                     content = options.postprocess(content, f);
                 }

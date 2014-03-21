@@ -30,10 +30,11 @@ Task targets, files and options may be specified according to the grunt [Configu
 ### Options
 
 #### htmlmin
-Type: `Object`  
+Type: `Object`, `null`  
 Default: `{}`
 
-These options are passed to [minify](https://github.com/kangax/html-minifier#options-quick-reference). before putting the templates in the template cache.
+If defined, these options are passed to [minify](https://github.com/kangax/html-minifier#options-quick-reference) before putting the templates in the template cache.  
+It can be set to null explicitly to keep trailing whitespace characters.
 
 #### preprocess
 Type: `Function`
@@ -84,6 +85,7 @@ The string to use for indentation.
 ### Usage examples
 
 For usage examples see the [gruntfile](https://github.com/remcohaszing/grunt-angular-templatecache/blob/master/Gruntfile.js) for this project.
+
 
 
 ## License

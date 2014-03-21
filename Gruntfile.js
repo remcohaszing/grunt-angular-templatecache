@@ -21,6 +21,14 @@ module.exports = function(grunt) {
                 dest: 'tmp/double_quote.js',
                 cwd: 'test/fixtures'
             },
+            htmlminNull: {
+                options: {
+                    htmlmin: null
+                },
+                src: 'index.html',
+                dest: 'tmp/htmlmin_null.js',
+                cwd: 'test/fixtures'
+            },
             multiline: {
                 src: 'multiline.html',
                 dest: 'tmp/multiline.js',
