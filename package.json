@@ -1,6 +1,6 @@
 {
   "name": "grunt-angular-templatecache",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "main": "Gruntfile.js",
   "scripts": {
@@ -16,13 +16,15 @@
     "url": "https://github.com/remcohaszing/grunt-angular-templatecache/issues"
   },
   "homepage": "https://github.com/remcohaszing/grunt-angular-templatecache",
-  "devDependencies": {
+  "dependencies": {
     "grunt": "^0.4.4",
+    "html-minifier": "^0.5.6"
+  },
+  "devDependencies": {
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-jshint": "^0.9.2",
     "grunt-contrib-nodeunit": "^0.3.3",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-lintspaces": "^0.4.1",
-    "html-minifier": "^0.5.6"
+    "grunt-lintspaces": "^0.4.1"
   }
 }
