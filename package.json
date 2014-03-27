@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git://github.com/remcohaszing/grunt-angular-templatecache.git"
   },
-  "author": "remcohaszing",
+  "author": "Remco Haszing",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/remcohaszing/grunt-angular-templatecache/issues"
@@ -26,5 +26,11 @@
     "grunt-contrib-nodeunit": "^0.3.3",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-lintspaces": "^0.4.1"
-  }
+  },
+  "peerDependencies": {
+    "grunt": "^0.4.4"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
 }

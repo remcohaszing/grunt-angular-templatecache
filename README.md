@@ -1,4 +1,4 @@
-# grunt-angular-templatecache [![Build Status](https://travis-ci.org/remcohaszing/grunt-angular-templatecache.png?branch=master)](https://travis-ci.org/remcohaszing/grunt-angular-templatecache)
+# grunt-angular-templatecache [![Build Status](https://travis-ci.org/remcohaszing/grunt-angular-templatecache.png?branch=master)](https://travis-ci.org/remcohaszing/grunt-angular-templatecache)[![Dependency Status](https://david-dm.org/remcohaszing/grunt-angular-templatecache.png?theme=shields.io)](https://david-dm.org/remcohaszing/grunt-angular-templatecache)[![devDependency Status](https://david-dm.org/remcohaszing/grunt-angular-templatecache/dev-status.png?theme=shields.io)](https://david-dm.org/remcohaszing/grunt-angular-templatecache#info=devDependencies)
 
 > Put AngularJS templates in the template cache.
 
