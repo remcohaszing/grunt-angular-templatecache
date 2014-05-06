@@ -18,14 +18,14 @@
   "homepage": "https://github.com/remcohaszing/grunt-angular-templatecache",
   "dependencies": {
     "grunt": "^0.4.4",
-    "html-minifier": "^0.5.6"
+    "html-minifier": "^0.6.0"
   },
   "devDependencies": {
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-nodeunit": "^0.3.3",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-lintspaces": "^0.5.0"
+    "grunt-lintspaces": "^0.5.1"
   },
   "peerDependencies": {
     "grunt": "^0.4.4"
