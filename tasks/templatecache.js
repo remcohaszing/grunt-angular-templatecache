@@ -8,6 +8,7 @@ var finalTemplate =
   '}]);\n';
 
 module.exports = function(grunt) {
+  var chalk = require('chalk');
 
   grunt.registerMultiTask('angularTemplateCache', function() {
     var options = this.options({
@@ -69,10 +70,12 @@ module.exports = function(grunt) {
     }
 
 
+    var templateCount = 0;
     this.files.forEach(function(files) {
       var cache = {};
+      templateCount += files.src.length;
       files.src.filter(function(f) {
-        grunt.log.writeln('Found template: ' + f);
+        grunt.log.verbose.writeln('Found template: ' + f);
         var content = grunt.file.read(files.cwd + '/' + f);
         if (options.preprocess instanceof Function) {
           content = options.preprocess(content, f);
@@ -99,6 +102,10 @@ module.exports = function(grunt) {
         }
       });
       grunt.file.write(files.dest, parsedTemplate);
+      grunt.log.writeln(
+        'Found ' + chalk.cyan(templateCount) + ' ' +
+        grunt.util.pluralize(templateCount, 'template/templates')
+      );
     });
   });
 };
