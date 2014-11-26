@@ -72,7 +72,7 @@ module.exports = function(grunt) {
     this.files.forEach(function(files) {
       var cache = {};
       files.src.filter(function(f) {
-        grunt.log.writeln('Found template: ' + f);
+        grunt.log.verbose.writeln('Found template: ' + f);
         var content = grunt.file.read(files.cwd + '/' + f);
         if (options.preprocess instanceof Function) {
           content = options.preprocess(content, f);
