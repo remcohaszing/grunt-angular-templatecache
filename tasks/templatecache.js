@@ -35,7 +35,7 @@ module.exports = function(grunt) {
      */
     function q(string) {
       var quote = options.quote;
-      string = string.replace(/\\/, '\\\\').replace(/\n/, '\\n');
+      string = string.replace(/\\/, '\\\\').replace(/\r?\n/, '\\n');
       string = string.replace(new RegExp(quote, 'g'), '\\' + quote);
       return quote + string + quote;
     }
