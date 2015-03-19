@@ -83,7 +83,11 @@ module.exports = function(grunt) {
           content = options.preprocess(content, f);
         }
         if (options.htmlmin !== null) {
-          content = minify(content, options.htmlmin);
+          try {
+            content = minify(content, options.htmlmin);
+          } catch(e) {
+            grunt.fail.warn('error minifying template: ' + f + '.');
+          }
         }
         if (options.postprocess instanceof Function) {
           content = options.postprocess(content, f);
