@@ -35,7 +35,7 @@ module.exports = function(grunt) {
      */
     function q(string) {
       var quote = options.quote;
-      string = string.replace(/\\/, '\\\\');
+      string = string.replace(/\\/, '\\\\').replace(/\n/, '\\n');
       string = string.replace(new RegExp(quote, 'g'), '\\' + quote);
       return quote + string + quote;
     }
@@ -49,13 +49,15 @@ module.exports = function(grunt) {
     function parsePutTemplate(templates) {
       var out = '';
       for(var name in templates) {
-        var tmpl = q(templates[name]);
+        var tmpl = templates[name];
         if(tmpl.indexOf('\n') === -1) {
-          tmpl = ' ' + tmpl;
+          // If it's a single line template, enquote it.
+          tmpl = ' ' + q(tmpl);
         } else {
+          // Otherwise enquote each line and indent it nicely.
           var ending = '\n' + indent + indent;
-          tmpl = tmpl.replace(/\n/g, '\\n' + q(' +' + ending));
-          tmpl = ending + tmpl + '\n' + indent;
+          tmpl = ending + tmpl.split(/^/gm).map(q).join(' +' + ending) +
+                 '\n' + indent;
         }
         out += '\n' + indent + grunt.template.process(
           putTemplate, {
