@@ -71,7 +71,6 @@ module.exports = function(grunt) {
       return out;
     }
 
-
     var templateCount = 0;
     this.files.forEach(function(files) {
       var cache = {};
@@ -79,20 +78,20 @@ module.exports = function(grunt) {
       files.src.filter(function(f) {
         grunt.log.verbose.writeln('Found template: ' + f);
         var content = grunt.file.read(files.cwd + '/' + f);
-        if (options.preprocess instanceof Function) {
+        if(options.preprocess instanceof Function) {
           content = options.preprocess(content, f);
         }
-        if (options.htmlmin !== null) {
+        if(options.htmlmin !== null) {
           try {
             content = minify(content, options.htmlmin);
           } catch(e) {
             grunt.fail.warn('error minifying template: ' + f + '.');
           }
         }
-        if (options.postprocess instanceof Function) {
+        if(options.postprocess instanceof Function) {
           content = options.postprocess(content, f);
         }
-        if (options.processName instanceof Function) {
+        if(options.processName instanceof Function) {
           f = options.processName(f, content);
         }
         cache[f] = content;

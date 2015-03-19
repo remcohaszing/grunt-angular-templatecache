@@ -5,7 +5,6 @@ var grunt = require('grunt');
 
 exports.templatecache = {
   test: function(test) {
-
     var files = fs.readdirSync('test/expected');
 
     test.expect(files.length);

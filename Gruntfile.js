@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = function(grunt) {
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     angularTemplateCache: {
@@ -123,6 +122,14 @@ module.exports = function(grunt) {
         'Gruntfile.js'
       ]
     },
+    jscs: {
+      src: [
+        '<%= jshint.files %>'
+      ],
+      options: {
+        config: '.jscsrc'
+      }
+    },
     nodeunit: {
       tests: 'test/**/*_test.js'
     },
@@ -139,10 +146,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-jscs');
 
   grunt.registerTask('test', 'Clean and run the tests.', [
     'clean',
     'jshint',
+    'jscs',
     'angularTemplateCache',
     'nodeunit'
   ]);
