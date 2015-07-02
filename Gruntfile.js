@@ -107,6 +107,11 @@ module.exports = function(grunt) {
         src: 'index.html',
         dest: 'tmp/tabs.js',
         cwd: 'test/fixtures'
+      },
+      crlf: {
+        src: 'multiline_crlf.html',
+        dest: 'tmp/multiline_crlf.js',
+        cwd: 'test/fixtures'
       }
     },
     clean: {
