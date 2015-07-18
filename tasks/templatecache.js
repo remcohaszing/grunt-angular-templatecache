@@ -35,7 +35,7 @@ module.exports = function(grunt) {
      */
     function q(string) {
       var quote = options.quote;
-      string = string.replace(/\\/, '\\\\').replace(/\r?\n/, '\\n');
+      string = string.replace(/\\/, '\\\\').replace(/\n/, '\\n');
       string = string.replace(new RegExp(quote, 'g'), '\\' + quote);
       return quote + string + quote;
     }
@@ -56,7 +56,7 @@ module.exports = function(grunt) {
         } else {
           // Otherwise enquote each line and indent it nicely.
           var ending = '\n' + indent + indent;
-          tmpl = ending + tmpl.split(/^/gm).map(q).join(' +' + ending) +
+          tmpl = ending + tmpl.replace(/\r\n/g, '\n').split(/^/gm).map(q).join(' +' + ending) +
                  '\n' + indent;
         }
         out += '\n' + indent + grunt.template.process(
